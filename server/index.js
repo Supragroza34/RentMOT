@@ -2,6 +2,7 @@ import Koa from 'koa'
 import Router from '@koa/router'
 import cors from '@koa/cors'
 import { bodyParser } from '@koa/bodyparser'
+import {checkRouter} from './src/routes/check.js'
 
 const app = new Koa()
 const router = new Router()
@@ -44,6 +45,7 @@ router.get('/api/hello/:name', (ctx) =>{
 });
 
 app.use(router.routes()).use(router.allowedMethods())
+app.use(checkRouter.routes()).use(checkRouter.allowedMethods());
 
 const port = process.env.PORT || 3001;
 app.listen(port, () =>{
